@@ -1,15 +1,37 @@
 [tool.poetry]
 name = "trolleybus"
-version = "0.1.0"
-description = ""
+version = "0.2.0"
+description = "Small publish/subscribe event bus with typed events"
 authors = ["Pavel 'Blane' Tuchin <blane.public@gmail.com>"]
+readme = "README.rst"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
-pylint = "^2.9.3"
+pytest = "^8.0"
+pylint = "^3.0"
+Sphinx = "^4.1.1"
+mypy = "^1.0"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pylint.main]
+py-version = "3.10"
+
+[tool.pylint.basic]
+typevar-rgx = "^T[A-Z]+$"
+
+[tool.pylint."messages control"]
+disable = [
+    "too-few-public-methods",
+    "fixme",
+]
+
+[tool.pylint.format]
+max-line-length = 110
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

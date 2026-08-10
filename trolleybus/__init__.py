@@ -1,6 +1,23 @@
-__version__ = '0.1.0'
-
-from .bus import EventBus, NoListenersError
-from .events import Event, OnStart, OnStarted, OnExit
+"""Small publish/subscribe event bus with typed events."""
+from .bus import DEFAULT_PRIORITY, EventBus, ListenerResult, NoListenersError
+from .emitter import Emitter, EmitterMixin
+from .events import Event, OnExit, OnStart, OnStarted
 from .subscriber import Subscriber, subscribe
-from .emitter import EmitterMixin
+
+__version__ = '0.2.0'
+
+__all__ = [
+    'DEFAULT_PRIORITY',
+    'Emitter',
+    'EmitterMixin',
+    'Event',
+    'EventBus',
+    'ListenerResult',
+    'NoListenersError',
+    'OnExit',
+    'OnStart',
+    'OnStarted',
+    'Subscriber',
+    '__version__',
+    'subscribe',
+]
