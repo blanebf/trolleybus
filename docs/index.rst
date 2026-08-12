@@ -1,16 +1,35 @@
-.. trolleybus documentation master file, created by
-   sphinx-quickstart on Mon Jul 26 02:39:15 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+trolleybus
+==========
 
-Welcome to trolleybus's documentation!
-======================================
+trolleybus is a small publish/subscribe event bus with typed events,
+inspired by the CherryPy bus.
+
+Events are plain classes that carry the payload type and the listener
+return type, so event payloads and results can be statically checked
+with mypy (the package ships a ``py.typed`` marker):
+
+.. code-block:: python
+
+    import trolleybus
+
+    class UserLoggedIn(trolleybus.Event[str, None]):
+        pass
+
+    bus = trolleybus.EventBus()
+
+    @bus.subscribe(UserLoggedIn)
+    def greet(username: str) -> None:
+        print(f'Hello, {username}!')
+
+    bus.broadcast(UserLoggedIn, 'kate')
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
+   intro
+   tutorial
+   reference
 
 Indices and tables
 ==================
