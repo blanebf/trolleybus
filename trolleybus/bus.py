@@ -10,7 +10,8 @@ import threading
 import uuid
 
 from collections.abc import Callable
-from typing import Any, Generic, NamedTuple, overload
+from dataclasses import dataclass
+from typing import Any, Generic, overload
 
 from . import events
 from .events import TP, TR
@@ -22,11 +23,12 @@ PriorityMap = dict[tuple[uuid.UUID, Listener], int]
 DEFAULT_PRIORITY = 50
 
 
-class ListenerResult(NamedTuple, Generic[TR]):
+@dataclass(frozen=True)
+class ListenerResult(Generic[TR]):
     """Outcome of a single listener as returned by :meth:`EventBus.broadcast_nothrow`.
 
-    :cvar value: value returned by the listener, `None` if it raised
-    :cvar error: exception raised by the listener, `None` if it returned normally
+    :ivar value: value returned by the listener, `None` if it raised
+    :ivar error: exception raised by the listener, `None` if it returned normally
     """
     value: TR | None
     error: Exception | None
